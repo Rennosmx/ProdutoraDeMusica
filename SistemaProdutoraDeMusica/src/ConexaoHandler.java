@@ -61,7 +61,7 @@ public class ConexaoHandler extends Thread {
       case LISTAR_COMPRADOS: {
         Cliente cliente = Sistema.getInstance().getClienteByLogin(clientRequest.getLogin());
         try {
-          out.writeObject(cliente.getCompras());
+          out.writeObject(Sistema.getInstance().getMusicasCompradas(cliente));
           out.flush();
         } catch (IOException e) {
           e.printStackTrace();
@@ -184,6 +184,22 @@ public class ConexaoHandler extends Thread {
         String errorMsg = null;      
         try {
           int codigo = Integer.parseInt(clientRequest.getParameters()[0]);
+          
+          Response response = new Response();
+          response.setSuccess(true);
+          if (Sistema.getInstance().clienteComprouMusica(clientRequest.getLogin(), codigo)) {
+        	  response.setData(new byte[] {1});
+          } else {
+        	  response.setData(new byte[] {0});
+          }
+          
+          try {
+			out.writeObject(response);
+			out.flush();
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }  
+
           errorMsg = enviarMusica(codigo);
         } catch (NumberFormatException e) {
           errorMsg = "Código inválido.";

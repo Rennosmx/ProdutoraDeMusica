@@ -256,7 +256,21 @@ public class Sistema {
     return resultado;
     
   }
- 
+  
+  public List<Musica> getMusicasCompradas(Cliente cliente) {
+	    List<Musica> resultado = new ArrayList<>();
+	    
+	      for (int codigo : cliente.getCompras()) {
+	    	  Musica mus = getMusicaByCodigo(codigo);
+	    	  if (mus != null) {
+	    		  resultado.add(mus);
+	    	  }
+	      }
+	    
+	    return resultado;
+	    
+  }
+  
   public boolean clienteComprouMusica(String loginCliente, int codigoMusica) {
     Cliente cliente = getClienteByLogin(loginCliente);
     if (cliente != null) {
