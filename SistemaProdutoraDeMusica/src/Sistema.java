@@ -23,7 +23,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class Sistema {
   //////////////////////////////////////////////////////////////
-  private static final String DIRETORIO_MUSICAS = "C:\\musicas";
+  private static final String DIRETORIO_MUSICAS = "musics";
   private static final String NUMERO_CARTAO_PRODUTORA = "2222";
   private static final Sistema INSTANCE = new Sistema();
   public static final int PORTA = 50000;
